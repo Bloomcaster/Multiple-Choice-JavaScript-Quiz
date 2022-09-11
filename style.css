@@ -10,7 +10,6 @@
 
 body {
     padding: 0;
-    display: flex;
     width: 100vw;
     height: 100vh;
     justify-content: center;
@@ -27,12 +26,12 @@ body {
     background-color: whitesmoke;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 0 0 10px 10px;
+    box-shadow: 0 0 10px 10px; 
 
 }
 
-.btn {
-    
+.btn-grid {
+    gap: 30px;
     background-color:blueviolet;
     display: flex;
     flex-direction: column;
@@ -58,6 +57,7 @@ body {
     font-size: 1.8rem;
     font-weight: bold;
     padding: 10px 10px;
+    background-color: gray;
 
 }
 
@@ -68,4 +68,5 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 

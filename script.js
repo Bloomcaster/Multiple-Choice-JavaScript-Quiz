@@ -1,16 +1,101 @@
-const startButton = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const containerQuestionElement = document.getElementById
-('container-questions')
-const questionElement = document.getElementById('question')
-const answerButtonElement = document.getElementById
-('answer-buttons')
+
+
+var countdownDisplay = document.getElementById(".countdown-timer");
+var startButton = document.getElementById(".start-btn");
+var nextButton = document.getElementById(".next-btn");
+var containerQuestionElement = document.getElementById(".container-questions");
+var questionElement = document.getElementById(".question");
+var answerButtonElement = document.getElementById(".answer-buttons");
+
+startButton.addEventListener('click', countdownTimer);
+
+var questionList = "";
+var chooseAnswer = 0,
+var winCounter = 0;
+var loseCounter = 0;
+var isWin = false;
+var countdownTimer;
+var timeCount;
+
+/*
+var questionList = [
+    {
+      question: 'What is false about JavaScript?',
+      answer: [
+          {text: 'JavaScript is the same as Java', correct: true },
+          {text: 'JavaScript powers the behavior of websites', correct: false }
+          {text: 'JavaScript is used with HTML and CSS to create websites', correct: false }
+          {text: 'JavaScrip is case sensitive', correct: false} 
+      ] 
+      
+  },
+  
+  {
+  
+  
+      question: 'Which operator is used to assign a value to an operator?',
+      answer: [
+          {text: '=', correct: true },
+          {text: '#', correct: false }
+          {text: '*', correct: false }
+          {text: '+', correct: false }
+      ]
+  },
+  {
+  
+          question: 'Which formula is used to round the number to the nearest integer?',
+          answer: [
+              {text: 'Math.round()', correct: true },
+              {text: 'rnd()', correct: false },
+              {text: 'round()', correct: false },
+              {text: 'mathRound()', correct: false },
+          ]
+      },
+      {
+  
+              question: 'Which is the correct styling for an array?',
+              answer: [
+                  {text: 'var flowers=["rose", "lily", "dahlia"]', correct: true },
+                  {text: 'varFlowers = rose, lily, dahlia', correct: false },
+                  {text: 'flowers= "rose", "lily", "dahlia"', correct: false },
+                  {text: 'VarFlowers==="rose, lily, dahlia"', correct: false },
+              ]
+          }*/
 
 
 
-let shuffledQuestions, currentQuestionIndex
+function init() {
+    getWins();
+    getLosses();
+}
+
+function startTimer() {
+//sets timer
+timer = setInterval(function(){
+    timerCount--;
+    timerElement.setNextQuestion = timerCount;
+    if (timerCount >0) {
+      if (isWin && timerCount > 0){
+        clearInterval(timer);
+        gameEnd();
+      }  
+  
+if (timerCount === 0){
+    clearInterval(timer);
+    gameEnd();
+}
+}, 1000);
+}
+
+
+ 
+
+
+
+var  shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame)
+
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
@@ -21,8 +106,8 @@ nextButton.addEventListener('click', () => {
 
 /* this will shuffle questions so not always the same order for game*/
 function startGame(){
- console.log('Start')
  startButton.classList.add('hide')
+ timerCount = 60;
  shuffledQuestions = questionList.sort(() => Math.random() - .5)
  currentQuestionIndex = 0
  containerQuestionElement.classList.remove('hide')
@@ -36,7 +121,7 @@ function setNextQuestion() {
 }
 /* we are doing this so that it makes it easier to sort out the correct answer, useful when having a large amount of data on the page (we are using a string not boolean*/
 function showQuestion(question) {
-    questionElement.innterText = question.question
+    questionElement.innerText = question.question
     question.answer.forEach(answer => {
         const button = document.createElement('button')
         button.innterText = answer.text
@@ -88,45 +173,4 @@ function clearStatusClass(element) {
 
 
 
-const questionList = [
-  {
-    question: jfdkljflkdsjf,
-    answer: [
-        {text: 'jfdkjfsl', correct: true },
-        {text: 'ggg', correct: false }
-        {text: 'tri', correct: false }
-        {text: 'ggg', correct: false} 
-        
-    
-},
-{
-
-    question: jfdkljflkdsjf,
-    answer: [
-        {text: 'jfdkjfsl', correct: true },
-        {text: 'ggg', correct: false }
-        {text: 'ggg', correct: false }
-        {text: 'ggg', correct: false }
-    ]
-},
-{
-
-        question: jfdkljflkdsjf,
-        answer: [
-            {text: 'jfdkjfsl', correct: true },
-            {text: 'ggg', correct: false },
-            {text: 'ggg', correct: false },
-            {text: 'ggg', correct: false },
-        ]
-    },
-    {
-
-            question: jfdkljflkdsjf,
-            answer: [
-                {text: 'jfdkjfsl', correct: true },
-                {text: 'ggg', correct: false },
-                {text: 'ggg', correct: false },
-                {text: 'ggg', correct: false },
-            ]
-        
-
+     
