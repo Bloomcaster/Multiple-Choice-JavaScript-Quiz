@@ -53,7 +53,7 @@ body {
  background-color:darkred;
 }
 
-.start-btn, .next-btn {
+.startbtn, .nextbtn {
     font-size: 1.8rem;
     font-weight: bold;
     padding: 10px 10px;

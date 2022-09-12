@@ -1,9 +1,9 @@
-var countdownDisplay = document.getElementById(".countdown-timer");
-var startButton = document.getElementById(".start-btn");
-var nextButton = document.getElementById(".next-btn");
-var containerQuestionElement = document.getElementById(".container-questions");
-var questionElement = document.getElementById(".question");
-var answerButtonElement = document.getElementById(".answer-buttons");
+var countdownDisplay = document.getElementById("countdown-timer");
+var startButton = document.getElementById("start-btn");
+var nextButton = document.getElementById("next-btn");
+var containerQuestionElement = document.getElementById("container-questions");
+var questionElement = document.getElementById("question");
+var answerButtonElement = document.getElementById("answer-buttons");
 
 var questionList = "";
 var chooseAnswer = 0;
@@ -11,7 +11,7 @@ var winCounter = 0;
 var loseCounter = 0;
 var isWin = false;
 var countdownTimer;
-var timeCount;
+var timeCount = 60;
 
 var questionList = [
   {
@@ -57,47 +57,57 @@ var questionList = [
   },
 ];
 
+
+
+function startTimer() {
+  //sets timer
+  countdownDisplay.textContent = timeCount
+  
+  timer = setInterval(function () {
+    timeCount--;
+     timerElement.setNextQuestion = timeCount; 
+if (timeCount >=0) {
+  if (isWin && timeCount > 0) {
+    clearInterval(timer);
+    winGame();
+  }
+}
+if (timeCount ===0) {
+  clearInterval(timer);
+  loseGame();
+}
+}, 1000);
+}
+   
+
+var shuffledQuestions, currentQuestionIndex;
+
+
 function init() {
   getWins();
   getLosses();
 }
 
-function startTimer() {
-  //sets timer
-  timer = setInterval(function () {
-    timeCount--;
-    timerElement.setNextQuestion = timeCount;
-
-    if (timerCount === 0) {
-      clearInterval(timer);
-      gameEnd();
-    }
-  }, 1000);
-}
-
-var shuffledQuestions, currentQuestionIndex;
-
-startButton = document.addEventListener("click", startGame);
-
-nextButton = document.addEventListener("click", () => {
-  currentQuestionIndex++;
-  setNextQuestion();
-});
 
 /* this will shuffle questions so not always the same order for game, also want to hide the start button when quiz begins*/
 function startGame() {
-  startButton.questionList.add("hide");
-  timeCount = 60;
+  
+  startTimer()
+  startButton.disabled = true;
+  startTimer()
+ 
   shuffledQuestions = questionList.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
-  containerQuestionElement.classList.remove("hide");
-  setNextQuestion();
 }
 
-function setNextQuestion() {
-  resetState();
-  showQuestion(shuffledQuestions[currentQuestionIndex]);
-}
+startButton.addEventListener("click", startGame);
+/*console.log(startButton);*/
+nextButton = document.addEventListener("click", () => {
+  currentQuestionIndex++;
+  
+});
+
+
 /* we are doing this so that it makes it easier to sort out the correct answer, useful when having a large amount of data on the page (we are using a string not boolean*/
 function showQuestion(question) {
   questionElement.innerText = question.question;
@@ -114,12 +124,8 @@ function showQuestion(question) {
 }
 
 /*not sure about the questionList here, trying to reset after the next button is pressed*/
-function resetState() {
-  nextButton.questionList.add("hide");
-  while (answerButtonElement.firstChild) {
-    answerButtonElement.removeChild(answerButtonElement.firstChild);
-  }
-}
+
+
 
 /*needs to be converted to an array since this is a live dataset for the for each loop*/
 function chooseAnswer(e) {

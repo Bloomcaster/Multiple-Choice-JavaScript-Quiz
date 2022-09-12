@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    <script defer src="script.js"></script>
+   
 
     <title>Multiple Choice JavaScript Quiz</title>
     <style>
@@ -19,7 +19,7 @@
 <body>
     <h1> JavaScript Time</h1>
     <h2>SCORE:</h2>
-    <h3> SECONDS REMAINING:</h3>
+    <h3> SECONDS REMAINING: <span id="countdown-timer"></span></h3>
     <div class="container">
     <div id="container-question" class="hide">
         <div id="question">Question</div>
@@ -29,9 +29,11 @@
             <button class="btn" data-correct = "0" >Answer C</button>
             <Button class="btn" data-correct = "0"  >Answer D</Button>
     </div>
+    
     <div class="controls">
-        <button id="start-btn" class="start-btn btn">Start</button>
-        <button id="next-btn" class="next-btn btn hide">Next</button>
+        <button id="start-btn" class="startbtn btn">Start</button>
+        <button id="next-btn" class="nextbtn btn hide">Next</button>
     </div>
+    <script defer src="script.js"></script>
 </body>
 </html>
