@@ -4,6 +4,8 @@ var nextButton = document.getElementById("next-btn");
 var containerQuestionElement = document.getElementById("container-questions");
 var questionElement = document.getElementById("question");
 var answerButtonElement = document.getElementById("answer-buttons");
+var timerElement = document.getElementById("timeCount");
+
 
 var questionList = "";
 var chooseAnswer = 0;
