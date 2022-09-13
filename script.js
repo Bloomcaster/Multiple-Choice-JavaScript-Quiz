@@ -2,7 +2,7 @@ var countdownDisplay = document.getElementById("countdown-timer");
 var startButton = document.getElementById("start-btn");
 var nextButton = document.getElementById("next-btn");
 var containerQuestionElement = document.getElementById("container-questions");
-var questionElement = document.getElementById("question");
+var questionElement = document.getElementById("questionList");
 var answerButtonElement = document.getElementById("answer-buttons");
 var timerElement = document.getElementById("timeCount");
 
@@ -14,6 +14,7 @@ var loseCounter = 0;
 var isWin = false;
 var countdownTimer;
 var timeCount = 60;
+var currentQuestionIndex = 0
 
 var questionList = [
   {
@@ -71,12 +72,12 @@ function startTimer() {
 if (timeCount >=0) {
   if (isWin && timeCount > 0) {
     clearInterval(timer);
-    winGame();
+    getWins();
   }
 }
 if (timeCount ===0) {
   clearInterval(timer);
-  loseGame();
+  getLosses();
 }
 }, 1000);
 }
@@ -112,7 +113,7 @@ nextButton = document.addEventListener("click", () => {
 
 /* we are doing this so that it makes it easier to sort out the correct answer, useful when having a large amount of data on the page (we are using a string not boolean*/
 function showQuestion(question) {
-  questionElement.innerText = question.question;
+  questionElement.innerText = questionList.question;
   question.answer.forEach((answer) => {
     const button = document.createElement("button");
     button.innterText = answer.text;
