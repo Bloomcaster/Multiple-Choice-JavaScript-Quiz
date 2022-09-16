@@ -1,159 +1,168 @@
-var countdownDisplay = document.getElementById("countdown-timer");
-var startButton = document.getElementById("start-btn");
-var nextButton = document.getElementById("next-btn");
-var containerQuestionElement = document.getElementById("container-questions");
-var questionElement = document.getElementById("questionList");
-var answerButtonElement = document.getElementById("answer-buttons");
-var timerElement = document.getElementById("timeCount");
+var countdownDisplay = document.querySelector("countdownDisplay");
+var startButton = document.querySelector("start-btn");
+var choices = Array.from(document.querySelectorAll(".choices"));
+var questionList = document.querySelector("questionList");
+var timerElement = document.getElementById("time-count");
+var win = document.querySelector(".win");
+var wineDrank = document.getElementById("#choice-buttons");
 
+//so that the buttons can be selected for answers
+var btnA = document.querySelector("#btnA");
+var btnA = document.querySelector("#btnB");
+var btnA = document.querySelector("#btnC");
+var btnA = document.querySelector("#btnD");
+var questionDisplay = document.querySelector("question-display");
 
-var questionList = "";
-var chooseAnswer = 0;
-var winCounter = 0;
-var loseCounter = 0;
+var currentQuestion = "";
+var correctAnswer = true;
 var isWin = false;
-var countdownTimer;
-var timeCount = 60;
-var currentQuestionIndex = 0
 
-var questionList = [
-  {
-    question: "What is false about JavaScript?",
-    answer: [
-      { text: "JavaScript is the same as Java", correct: true },
-      { text: "JavaScript powers the behavior of websites", correct: false },
-      {
-        text: "JavaScript is used with HTML and CSS to create websites",
-        correct: false,
-      },
-      { text: "JavaScrip is case sensitive", correct: false },
-    ],
-  },
+var questionTally = 0;
+var questionChoices = [];
+var timer;
+var timerCount;
+var questionNum;
 
+
+//this the the question array
+questionList = [
   {
-    question: "Which operator is used to assign a value to an operator?",
-    answer: [
-      { text: "=", correct: true },
-      { text: "#", correct: false },
-      { text: "*", correct: false },
-      { text: "+", correct: false },
-    ],
+    question: "Which is not a Bordeaux varietal?",
+    choices: ["merlot", "sangiovese", "malbec", "cabernet sauvignon"],
+    answer: "sangiovese",
   },
   {
     question:
-      "Which formula is used to round the number to the nearest integer?",
-    answer: [
-      { text: "Math.round()", correct: true },
-      { text: "rnd()", correct: false },
-      { text: "round()", correct: false },
-      { text: "mathRound()", correct: false },
+      "What two characteristics makes Hunter Valley semillion stand out from other examples around the world?",
+    choices: [
+      "high alcohol, rich fruit",
+      "low alcohol, matchstick aroma",
+      "high alcohol, matchstick aroma",
+      "low alcohol, rich fruit",
     ],
+    answer: "low alcohol, matchstick aroma",
   },
   {
-    question: "Which is the correct styling for an array?",
-    answer: [
-      { text: 'var flowers=["rose", "lily", "dahlia"]', correct: true },
-      { text: "varFlowers = rose, lily, dahlia", correct: false },
-      { text: 'flowers= "rose", "lily", "dahlia"', correct: false },
-      { text: 'VarFlowers==="rose, lily, dahlia"', correct: false },
+    question: "What is pinot noir called in Italy?",
+    choices: ["pinot negro", "blaugurgunder", "pinot nero", "pinot grigio"],
+    answer: "pinot nero",
+  },
+  {
+    question:
+      "Which winery is famous for breaking the ceiling for American made wines in the 1976 Judgment of Paris?",
+    choices: [
+      "Opus One",
+      "Tablas Creek",
+      "Duckhorn Vineyards",
+      "Chateau Montelena",
     ],
+    answere: "Chateau Montelena",
   },
 ];
 
 
 
-function startTimer() {
-  //sets timer
-  countdownDisplay.textContent = timeCount
-  
-  timer = setInterval(function () {
-    timeCount--;
-     timerElement.setNextQuestion = timeCount; 
-if (timeCount >=0) {
-  if (isWin && timeCount > 0) {
-    clearInterval(timer);
-    getWins();
-  }
-}
-if (timeCount ===0) {
-  clearInterval(timer);
-  getLosses();
-}
-}, 1000);
-}
-   
-
-var shuffledQuestions, currentQuestionIndex;
-
-
-function init() {
-  getWins();
-  getLosses();
-}
-
-
-/* this will shuffle questions so not always the same order for game, also want to hide the start button when quiz begins*/
 function startGame() {
-  
-  startTimer()
+  isWin = false;
+  timerCount = 60;
   startButton.disabled = true;
-  startTimer()
- 
-  shuffledQuestions = questionList.sort(() => Math.random() - 0.5);
-  currentQuestionIndex = 0;
+  startTimer();
 }
 
-startButton.addEventListener("click", startGame);
-/*console.log(startButton);*/
-nextButton = document.addEventListener("click", () => {
-  currentQuestionIndex++;
+function winGame() {
+  questionChoices.textContent = "CHEERS AND ENJOY A GLASS OF WINE";
+  winCounter++;
+  startButton.disabled = false;
+  setWins();
+}
+
+
+
+//this function is used for the timer
+function startTimer() {
+  timer = setInterval(function () {
+    timerCount--;
+    timerElement.textContent = timerCount;
+    if (timerCount >= 0) {
+      if (isWin && timerCount > 0) {
+        clearInterval(timer);
+        winGame();
+      }
+    }
+    if (timerCount === 0) {
+      clearInterval(timer);
+      lossGame();
+    }
+  }, 1000);
+}
+
+
+
+function rightAnswers (event) {
+  event.preventDefault();
+
+  if(questionList[questionNum].answer== event.target.value){
+questionTally=questionTally+1;
+  }
+  else{
+    timerCount = timerCount-10;
+  }
+  if(questionNum<questionList.length) {
+    revealQuestion(questionNum+1);
+}
+else{
+  winGame();
+}
+questionNum ++;
+};
   
+
+ function revealQuestion (x){
+  questionDisplay.textContent = questionList[x].text;
+  btnA.textContent = questionList[x].bnt[0];
+  btnB.textContent = questionList[x].btn[1];
+  btnC.textContent = questionList[x].btn[2];
+  btnD.textContent = questionList[x].btn[3];  
+  var x = questionNum;     
+}
+
+ 
+  
+  
+
+  
+/*this shows the win count and sets it to the storage, rest of functions are for win/loss tallies for the game*/
+function setWins() {
+  win.textContent = winCounter;
+  localStorage.setItem("winCount", winCounter);
+
+
+function getWins() {
+  var talliedWins = localStorage.getItem("winCount");
+  if (talliedWins === null) {
+    winCounter = 0;
+  } else {
+    wineCounter = talliedWins;
+  }
+  win.textContent = winCounter;
+}
+
+
+
+
+var startButton = document.querySelector("#start-btn");
+startButton.addEventListener("click", () => {
+    startGame();
+    console.log("Button clicked.");
 });
 
-
-/* we are doing this so that it makes it easier to sort out the correct answer, useful when having a large amount of data on the page (we are using a string not boolean*/
-function showQuestion(question) {
-  questionElement.innerText = questionList.question;
-  question.answer.forEach((answer) => {
-    const button = document.createElement("button");
-    button.innterText = answer.text;
-    button.classList.add("btn");
-    if (answer.correct) {
-      button.dataset.correct = answer.correct;
-    }
-    button.addEventListener("click", chooseAnswer);
-    answerButtonElement.appendChild(button);
-  });
-}
-
-/*not sure about the questionList here, trying to reset after the next button is pressed*/
+optionsBtns.forEach(function(click){
+  click.addEventListener("click", guessAnswer);
+});
+ 
 
 
-
-/*needs to be converted to an array since this is a live dataset for the for each loop*/
-function chooseAnswer(e) {
-  const selectedButton = e.target;
-  const correct = selectedButton.dataset.correct;
-  Array.from(answerButtonsElement.children).forEach((button) => {
-    setStatusClass(button.button.dataset.correct);
-  });
-  if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove("hide");
-  } else {
-    startButton.innerText = "Restart";
-    startButton.classList.remove("hide");
-  }
-}
-function setStatusClass(element, correct) {
-  clearStatusClass(element);
-  if (correct) {
-    element.classList.add("correct");
-  } else {
-    element.classList.add("wrong");
-  }
-}
-
-function clearStatusClass(element) {
-  element.classList.remove("correct");
-  element.classList.remove("wrong");
+wineDrank.forEach(function(click){
+  click.addEventListener("click", guessAnswer);
+});
 }

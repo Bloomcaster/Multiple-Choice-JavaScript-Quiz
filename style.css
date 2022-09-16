@@ -1,72 +1,62 @@
-/* this sets box sizing for all the elements*/
- *::before, *::after {
+* {
     box-sizing: border-box;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
-
-
-
 
 
 body {
+    background-image:url('Champagne Shot.jpg');
+    color: #FFFFFF;
+    box-sizing: border-box;
+    margin: 0;
     padding: 0;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    background-color: darkseagreen;
-    
+    color:rgb(243, 67, 134);
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
 
 
 
 .container {
-    width: 800px;
-    max-width: 80%;
-    background-color: whitesmoke;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 0 10px 10px; 
-
-}
-
-.btn-grid {
-    gap: 30px;
-    background-color:blueviolet;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    padding: 15px 10px;
-    outline: black;
-}
-
-.btn:hover {
-    border-color: red;
-}
-/*when clicked the right answers should turn this color*/
-.btn-correct {
-    background-color: bright greenyellow;
-}
-
-/*when clicked this should turn this color*/
-.btn-wrong {
- background-color:darkred;
-}
-
-.startbtn, .nextbtn {
-    font-size: 1.8rem;
-    font-weight: bold;
-    padding: 10px 10px;
-    background-color: gray;
-
-}
-
-
-
-.controls {
+    width: 100vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 80rem;
+    }
+
+
+.btn  {
+flex-direction: column;
+font-size: 3rem;
+padding: 2rem 0;
+width: 35rem;
+text-align: center;
+color: rgb(32, 145, 145);
+border-radius: 3rem;
+box-shadow: 2px;
+margin-bottom: 1rem;
 }
+
+
+
+
+
+
+/*
+start {
+    font-size: 2rem;
+    font-weight: bold;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: rgb(138, 78, 78);
+
+}
+
+
+
+
+
 
 

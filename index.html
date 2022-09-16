@@ -1,44 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-   
 
-    <title>Multiple Choice JavaScript Quiz</title>
-    <style>
-        h1 {
-            text-align:center;
-        }
-    </style>
+
+    <title>Multiple-Choice Quiz</title>
 </head>
 
 <body>
-    <h1> JavaScript Time</h1>
+
+    <div class="wrapper">
+
+        <h1> WINE TIME QUIZ</h1>
+        <style>
+            h1 {
+                text-align: center;
+            }
+        </style>
+        <p>
+            Time to test your wine knowledge! Click through the following wine centric questions to see if you take the
+            high score.
+            Time will be deducted for each wrong answer and you have 60 seconds to complete the quiz!
+        </p>
+
+        <button id="start-btn">Start Quiz</button>
+    </div>
+
+
+    <div class="scores"></div>
     <h2>SCORE:</h2>
-    <h3> SECONDS REMAINING: <span id="countdown-timer"></span></h3>
-    <div id="timeCount"></div>
-    <div class="container">
-    <div id="container-question" class="hide">
-        
-        <div id="questionList">Question</div>
-        
-        
-         <div id="answer-buttons" class="btn-grid">
-            <button class="btn" data-correct = "0" >Answer A</button>
-            <button class="btn" data-correct = "0" >Answer B</button>
-            <button class="btn" data-correct = "0" >Answer C</button>
-            <Button class="btn" data-correct = "0"  >Answer D</Button>
+    <div class="timer"></div>
+    <h3> SECONDS REMAINING:</h3> <span id="time-count"></span>
+
+    <section>
+        <div class="container">
+            <div class="container-questions" class="hide"></div>
+
+            <div id="question-display"></div>
+            <button id="question" class="btn" value="questionList"></button>
+
+            <div id="question-btn"></div>
+             
+           
+             <div id="choice-buttons" class="btn"></div>
+             <button id="btnA" class="btn" value="A">Answer A</button>
+            <button id="bntB" class="btn" value="B">Answer B</button>
+            <button id="btnC" class="btn" value="C">Answer C</button>
+            <button id="btnD" class="btn" value="D">Answer D</button>
+    </section>
+
+
+
+
+    <button id="reset-button"> Reset-Score</button>
     </div>
-    
-    
-    <div class="controls">
-        <button id="start-btn" class="startbtn btn">Start</button>
-        <button id="next-btn" class="nextbtn btn hide">Next</button>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <script defer src="script.js"></script>
 </body>
+
 </html>
