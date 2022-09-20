@@ -153,12 +153,14 @@ function getWins() {
 var startButton = document.querySelector("#start-btn");
 startButton.addEventListener("click", () => {
     startGame();
-    console.log("Button clicked.");
+
 });
 
 optionsBtns.forEach(function(click){
   click.addEventListener("click", guessAnswer);
+
 });
+
  
 
 
