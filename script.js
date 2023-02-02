@@ -1,4 +1,4 @@
-var quizInfo = [
+const quizData = [
   {
     question: "Which is not a Bordeaux varietal?",
     a: "merlot",
@@ -29,121 +29,83 @@ var quizInfo = [
     b: "Tablas Creek",
     c: "Duckhorn Vineyards",
     d: "Chateau Montelena",
-    correct: "Chateau Montelena",
+    correct: "d",
   },
 ];
 
+const quiz = document.getElementById('quiz')
+const answerEls = document.querySelectorAll('.answer')
+const questionEl = document.getElementById('question')
+const a_text = document.getElementById('a_text')
+const b_text = document.getElementById('b_text')
+const c_text = document.getElementById('c_text')
+const d_text = document.getElementById('d_text')
+const submitBtn = document.getElementById('submit')
+
+let currentQuiz = 0
+let score = 0
+
+loadQuiz() 
+
+function loadQuiz() {
   
+  
+  deselectAnswers()
 
+  const currentQuizData = quizData[currentQuiz]
 
+  questionEl.innterText = currentQuizData.question
+  a_text.innerText = currentQuizData.a
+  b_text.innerText = currentQuizData.b
+  c_text.innerText = currentQuizData.c
+  d_text.innerText = currentQuizData.d
 
-
-
-
-
-function startGame() {
-  isWin = false;
-  timerCount = 60;
-  startButton.disabled = true;
-  startTimer();
 }
 
-function winGame() {
-  questionChoices.textContent = "CHEERS AND ENJOY A GLASS OF WINE";
-  winCounter++;
-  startButton.disabled = false;
-  setWins();
+function deselectAnswers() {
+  answerEls.forEach(answerEl => answerEl.checked = false)
 }
 
-
-
-//this function is used for the timer
-function startTimer() {
-  timer = setInterval(function () {
-    timerCount--;
-    timerElement.textContent = timerCount;
-    if (timerCount >= 0) {
-      if (isWin && timerCount > 0) {
-        clearInterval(timer);
-        winGame();
-      }
+function getSelected() {
+  let answerEl
+  answersEls.forEach(answerEl => {
+    if(answerEl.checked) {
+      answer = answerEl.id
     }
-    if (timerCount === 0) {
-      clearInterval(timer);
-      lossGame();
+  })
+  return answer
+}
+
+submitBtn.addEventListener('click', () => {
+  const answer = getSelected()
+  if(answer) {
+    if (answer === quizData[currentQuiz].correct) {
+      score++
     }
-  }, 1000);
-}
 
+    currentQuiz++
 
+    if(currentQuiz < quizData.length) {
+      loadQuiz()
+    } else {
+      quiz.innerHTML = `
+      <h2>Wine rewards you answered ${score}/${quizData.length} questions correctly!</h2>
 
-function rightAnswers (event) {
-  event.preventDefault();
-
-  if(questionList[questionNum].answer== event.target.value){
-questionTally=questionTally+1;
+      <button onclick="location.reload()">Reload</button>
+      `
+    }
   }
-  else{
-    timerCount = timerCount-10;
-  }
-  if(questionNum<questionList.length) {
-    revealQuestion(questionNum+1);
-}
-else{
-  winGame();
-}
-questionNum ++;
-};
-  
-
- function revealQuestion (x){
-  questionDisplay.textContent = questionList[x].text;
-  btnA.textContent = questionList[x].bnt[0];
-  btnB.textContent = questionList[x].btn[1];
-  btnC.textContent = questionList[x].btn[2];
-  btnD.textContent = questionList[x].btn[3];  
-  var x = questionNum;     
-}
-
- 
-  
-  
-
-  
-/*this shows the win count and sets it to the storage, rest of functions are for win/loss tallies for the game*/
-function setWins() {
-  win.textContent = winCounter;
-  localStorage.setItem("winCount", winCounter);
-
-
-function getWins() {
-  var talliedWins = localStorage.getItem("winCount");
-  if (talliedWins === null) {
-    winCounter = 0;
-  } else {
-    wineCounter = talliedWins;
-  }
-  win.textContent = winCounter;
-}
-
-
-
-
-var startButton = document.querySelector("#start-btn");
-startButton.addEventListener("click", () => {
-    startGame();
-
 });
 
-optionsBtns.forEach(function(click){
-  click.addEventListener("click", guessAnswer);
+  
 
-});
+
+
+
+
+
+
 
  
 
 
-wineDrank.forEach(function(click){
-  click.addEventListener("click", guessAnswer);
-});
-}
