@@ -13,64 +13,39 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+            <h2 id="question">Question Text</h2>
+            <ul>
+                <li>
+                    <input type="radio" name="answer" id="a" class="answer">
+                    <label for="a" id="a_text">Answer</label>
+                </li>
 
-        <h1> WINE TIME QUIZ</h1>
-        <style>
-            h1 {
-                text-align: center;
-            }
-        </style>
-        <p>
-            Time to test your wine knowledge! Click through the following wine centric questions to see if you take the
-            high score.
-            Time will be deducted for each wrong answer and you have 60 seconds to complete the quiz!
-        </p>
+                <li>
+                    <input type="radio" name="answer" id="b" class="answer">
+                    <label for="b" id="a_text">Answer</label>
+                </li>
 
-        <button id="start-btn">Start Quiz</button>
+                <li>
+                    <input type="radio" name="answer" id="c" class="answer">
+                    <label for="c" id="a_text">Answer</label>
+                </li>
+
+                <li>
+                    <input type="radio" name="answer" id="d" class="answer">
+                    <label for="d" id="a_text">Answer</label>
+                </li>
+
+            </ul>
+        </div>
     </div>
+    <button id="submit">SUBMIT</button>
 
+    <script src="script.js"></script>
 
-    <div class="scores"></div>
-    <h2>SCORE:</h2>
-    <div class="timer"></div>
-    <h3> SECONDS REMAINING:</h3> <span id="time-count"></span>
-
-    <section>
-        <div class="container">
-            <div class="container-questions" class="hide"></div>
-
-            <div id="question-display"></div>
-            <button id="question" class="btn" value="questionList"></button>
-
-            <div id="question-btn"></div>
-             
-           
-             <div id="choice-buttons" class="btn"></div>
-             <button id="btnA" class="btn" value="A">Answer A</button>
-            <button id="bntB" class="btn" value="B">Answer B</button>
-            <button id="btnC" class="btn" value="C">Answer C</button>
-            <button id="btnD" class="btn" value="D">Answer D</button>
-    </section>
-
-
-
-
-    <button id="reset-button"> Reset-Score</button>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <script defer src="script.js"></script>
 </body>
-
 </html>
+
+        
+        
