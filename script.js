@@ -1,64 +1,43 @@
-var countdownDisplay = document.querySelector("countdownDisplay");
-var startButton = document.querySelector("start-btn");
-var choices = Array.from(document.querySelectorAll(".choices"));
-var questionList = document.querySelector("questionList");
-var timerElement = document.getElementById("time-count");
-var win = document.querySelector(".win");
-var wineDrank = document.getElementById("#choice-buttons");
-
-//so that the buttons can be selected for answers
-var btnA = document.querySelector("#btnA");
-var btnA = document.querySelector("#btnB");
-var btnA = document.querySelector("#btnC");
-var btnA = document.querySelector("#btnD");
-var questionDisplay = document.querySelector("question-display");
-
-var currentQuestion = "";
-var correctAnswer = true;
-var isWin = false;
-
-var questionTally = 0;
-var questionChoices = [];
-var timer;
-var timerCount;
-var questionNum;
-
-
-//this the the question array
-questionList = [
+var quizInfo = [
   {
     question: "Which is not a Bordeaux varietal?",
-    choices: ["merlot", "sangiovese", "malbec", "cabernet sauvignon"],
-    answer: "sangiovese",
+    a: "merlot",
+    b:  "sangiovese", 
+    c:  "malbec", 
+    d:  "cabernet sauvignon",
+    correct: "b",
   },
   {
-    question:
-      "What two characteristics makes Hunter Valley semillion stand out from other examples around the world?",
-    choices: [
-      "high alcohol, rich fruit",
-      "low alcohol, matchstick aroma",
-      "high alcohol, matchstick aroma",
-      "low alcohol, rich fruit",
-    ],
-    answer: "low alcohol, matchstick aroma",
+    question: "What two characteristics makes Hunter Valley semillion stand out from other examples around the world?",
+    a: "high alcohol, rich fruit",
+    b: "low alcohol, matchstick aroma",
+    c: "high alcohol, matchstick aroma",
+    d: "low alcohol, rich fruit",
+    correct: "c",
   },
   {
     question: "What is pinot noir called in Italy?",
-    choices: ["pinot negro", "blaugurgunder", "pinot nero", "pinot grigio"],
-    answer: "pinot nero",
+    a: "pinot negro",
+    b: "blaugurgunder",
+    c: "pinot nero",
+    d: "pinot grigio",
+    correct: "c",
   },
   {
-    question:
-      "Which winery is famous for breaking the ceiling for American made wines in the 1976 Judgment of Paris?",
-    choices: [
-      "Opus One",
-      "Tablas Creek",
-      "Duckhorn Vineyards",
-      "Chateau Montelena",
-    ],
-    answere: "Chateau Montelena",
+    question: "Which winery is famous for breaking the ceiling for American made wines in the 1976 Judgment of Paris?",
+    a: "Opus One",
+    b: "Tablas Creek",
+    c: "Duckhorn Vineyards",
+    d: "Chateau Montelena",
+    correct: "Chateau Montelena",
   },
 ];
+
+  
+
+
+
+
 
 
 
