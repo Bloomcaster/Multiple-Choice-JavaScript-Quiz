@@ -1,3 +1,5 @@
+//this is the question array that should populate on the page
+
 const quizData = [
   {
     question: "Which is not a Bordeaux varietal?",
@@ -34,74 +36,62 @@ const quizData = [
     correct: "d",
   },
 ];
-
+//these are the properties that in the question container to pull information
 const quiz = document.getElementById("quiz");
-const answerEls = document.querySelectorAll(".answer");
-const questionEl = document.getElementById("question");
+const answerElements = document.querySelectorAll(".answer");
+const questionElement = document.getElementById("question");
 const a_text = document.getElementById("a_text");
 const b_text = document.getElementById("b_text");
 const c_text = document.getElementById("c_text");
 const d_text = document.getElementById("d_text");
-const submitBtn = document.getElementById("submit");
+const submitButton = document.getElementById("submit");
 
 let currentQuiz = 0;
 let score = 0;
 
-loadQuiz();
 
-function loadQuiz() {
-  deselectAnswers();
+//this unselects any  previous answer option in the quiz with the class answer using
+const unselectAnswers = () => {
+  answerElements.forEach((answer) => (answer.checked = false));
+};
 
-  const currentQuizData = quizData[currentQuiz];
 
-  questionEl.textContent = currentQuizData.question;
-  a_text.innerText = currentQuizData.a;
-  b_text.innerText = currentQuizData.b;
-  c_text.innerText = currentQuizData.c;
-  d_text.innerText = currentQuizData.d;
-}
-
-function deselectAnswers() {
-  answerEls.forEach((answerEl) => (answerEl.checked = false));
-}
-
-let answerArray = [a_text, b_text, c_text, d_text]
-
-for(var i = 0; i < answerArray.length; i++) {
-  answerArray[i].addEventListener('click', function(e) {
-    var selected = e.target
-    selected.setAttribute('id', "checked")
-    console.log(selected)
-  })
-}
-
-function getSelected() {
-  answerArray.push(a_text, b_text, c_text, d_text)
-  answerArray.forEach((answerEl) => {
-    console.log(answerEl)
-    if (answerEl.id === "checked") {
-      return answerEl.textContent
-    }
-    return null
+//returns the selects answer in the quiz, looping through all elemetns with class answer
+const onceSelected = () => {
+  let answer;
+  answerElements.forEach((answerElement) => {
+    if (answerElement.checked) answer = answerElement.id;
   });
-}
+  return answer;
+};
 
-submitBtn.addEventListener("click", () => {
-  const answer = getSelected();
-  console.log(answer)
-  if(answer === undefined) return
-  if (answer === quizData[currentQuiz].correct) {
-    score++;
-  }
-  currentQuiz++;
+ //this shows the current quiz questions and answer options, it first calls the "unselectAnswers" to clear previous select
+ const beginQuiz = () => {
+  unselectAnswers();
+  const currentData = quizData[currentQuiz];
+  questionElement.innerText = currentData.question;
+  a_text.innerText = currentData.a;
+  b_text.innerText = currentData.b;
+  c_text.innerText = currentData.c;
+  d_text.innerText = currentData.d;
+};
 
-  if (currentQuiz < quizData.length) {
-    loadQuiz();
-  } else {
-    quiz.innerHTML = `
-      <h2>Wine rewards!! You answered ${score}/${quizData.length} questions correctly!</h2>
+beginQuiz();
+
+
+//once the button is clicked this determines if to add to the score depending on if the answer is truly equal to the right answer, ends with a message of Wine Rewards!!
+submitButton.addEventListener("click", () => {
+  const answer = onceSelected();
+  if (answer) {
+    if (answer === quizData[currentQuiz].correct) score ++;
+    currentQuiz++;
+    if (currentQuiz < quizData.length) beginQuiz();
+    else {
+      quiz.innerHTML = `
+  <h2>Wine rewards!! You answered ${score}/${quizData.length} questions correctly!</h2>
 
       <button onclick="location.reload()">Reload</button>
       `;
+   }
   }
 });
