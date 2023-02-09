@@ -1,5 +1,6 @@
 # Multiple-Choice-JavaScript-Quiz
 
+![Screenshot (52)](https://user-images.githubusercontent.com/108914519/217691944-9656b199-8c0b-4b83-8d5d-d112981ee177.png)
 
 
 
